@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Admin\Invoice\UpdateRequest;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
@@ -25,6 +25,12 @@ class InvoiceController extends Controller
     public function delete($id)
     {
         Invoice::destroy($id);
+        return redirect()->back();
+    }
+    public function update(UpdateRequest $request, $id){
+        Invoice::find($id)->update([
+            'status'=>$request->status
+        ]);
         return redirect()->back();
     }
 }

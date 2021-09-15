@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class SendMail extends Mailable
 {
@@ -19,7 +20,7 @@ class SendMail extends Mailable
      */
     public function __construct()
     {
-        $this->name = "FPT Polytechnic";
+        $this->name = Auth::user()->name;
     }
 
     /**

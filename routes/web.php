@@ -100,6 +100,7 @@ Route::group([
             Route::get('/', 'InvoiceController@index')->name('index');
             Route::get('show/{id}', 'InvoiceController@show')->name('show');
             Route::post('delete/{id}', 'InvoiceController@delete')->name('delete');
+            Route::post('edit/{id}', 'InvoiceController@update')->name('update');
         });
     });
     //end invoice

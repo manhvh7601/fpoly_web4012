@@ -29,10 +29,4 @@ class Invoice extends Model
         return $this->beLongsto(User::class, 'user_id', 'id');
     }
     //Accessor get{Attribute}Attribute
-    public function getTotalPriceAttribute()
-    {
-        $newValue = $this->attributes['total_price'] . " VND";
-
-        return $newValue;
-    }
 }

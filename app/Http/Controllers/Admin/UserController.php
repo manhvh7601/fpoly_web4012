@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
+use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
@@ -38,15 +39,11 @@ class UserController extends Controller
     }
     public function store(StoreRequest $request)
     {
-        $data = $request->except('_token');
-        User::create($data);
-
-        if ($request->ajax() == true) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'ok'
-            ]);
-        }
+        $user = $request->except('_token');
+        // if (User::where('email', '=', Input::get('email'))->exists()) {
+        //     // user found
+        //  }
+        User::create($user);
 
         return redirect()->route('admin.users.index');
     }
@@ -59,15 +56,6 @@ class UserController extends Controller
     {
         $data = $request->except('_token');
         $user->update($data);
-
-        // $user->name = $data['name'];
-        // $user->email = $data['email'];
-        // $user->password = $data['password'];
-        // $user->gender = $data['gender'];
-        // $user->role = $data['role'];
-        // $user->address = $data['address'];
-
-        // $user->save();
 
         return redirect()->route('admin.users.index');
     }
